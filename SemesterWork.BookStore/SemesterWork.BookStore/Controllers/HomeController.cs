@@ -4,9 +4,19 @@ namespace SemesterWork.BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public ViewResult Index()
         {
-            return "Web";
+            return View();
+        }
+
+        public ViewResult AboutUs()
+        {
+            return View();
+        }
+
+        public ViewResult ContactUs()
+        {
+            return View();
         }
     }
 }

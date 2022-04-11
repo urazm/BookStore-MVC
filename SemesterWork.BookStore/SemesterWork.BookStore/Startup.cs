@@ -26,12 +26,14 @@ namespace SemesterWork.BookStore
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapDefaultControllerRoute();       
 
             });
             
