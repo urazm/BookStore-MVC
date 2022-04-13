@@ -9,7 +9,7 @@ namespace SemesterWork.BookStore.Repository
         public List<BookModel> GetAllBooks()
         {
             return DataSource();
-        }
+        }   
 
         public BookModel GetBookById(int id)
         {
