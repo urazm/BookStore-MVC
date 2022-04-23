@@ -25,11 +25,11 @@ namespace SemesterWork.BookStore.Repository
         {
             return new List<BookModel>()
             {
-                new BookModel() { Id = 1, Title = "MVC", Author = "Urazalin"},
-                new BookModel() { Id = 2, Title = "Java", Author = "Urazalin"},
-                new BookModel() { Id = 3, Title = "C#", Author = "Urazalin"},
-                new BookModel() { Id = 4, Title = "PHP", Author = "Urazalin"},
-                new BookModel() { Id = 5, Title = "JS", Author = "Urazalin"},
+                new BookModel() { Id = 1, Title = "MVC", Author = "Urazalin", Description = "Description for MVC book"},
+                new BookModel() { Id = 2, Title = "Java", Author = "Urazalin", Description = "Description for Java book"},
+                new BookModel() { Id = 3, Title = "C#", Author = "Urazalin", Description = "Description for C# book"},
+                new BookModel() { Id = 4, Title = "PHP", Author = "Urazalin", Description = "Description for PHP book"},
+                new BookModel() { Id = 5, Title = "JS", Author = "Urazalin", Description = "Description for JS book"},
             };
         }
     }
