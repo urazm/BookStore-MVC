@@ -6,6 +6,7 @@ namespace SemesterWork.BookStore.Controllers
     {
         public ViewResult Index()
         {
+            ViewBag.Title = 123;
             return View();
         }
 
