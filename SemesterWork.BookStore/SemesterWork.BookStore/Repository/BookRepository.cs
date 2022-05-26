@@ -10,7 +10,6 @@ namespace SemesterWork.BookStore.Repository
         {
             return DataSource();
         }   
-
         public BookModel GetBookById(int id)
         {
             return DataSource().Where(x => x.Id == id).FirstOrDefault();
