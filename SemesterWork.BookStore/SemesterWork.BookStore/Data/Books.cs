@@ -1,4 +1,6 @@
-﻿namespace SemesterWork.BookStore.Data
+﻿using System;
+
+namespace SemesterWork.BookStore.Data
 {
     public class Books
     {   
@@ -9,5 +11,7 @@
         public string Category { get; set; }
         public string Language { get; set; }
         public int TotalPages { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }   
     }
 }

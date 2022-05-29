@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SemesterWork.BookStore.Data;
+using SemesterWork.BookStore.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace SemesterWork.BookStore
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True;"));
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddScoped<BookRepository, BookRepository>();   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
