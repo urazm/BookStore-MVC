@@ -4,11 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title> @ViewData["Title"] | Book store application</title>
+    <link href="~/css//Site.css" rel="stylesheet"/>
     <environment include="Development">
         <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+         
     </environment>
 
 </head>
@@ -44,6 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="book" asp-action="getallbooks">All Books</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="book" asp-action="addNewBook">Add new book</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -55,7 +60,7 @@
     <main role="main">
         @RenderBody()
     </main>
-    <footer class="border-top footer text-muted text-center">
+    <footer class="border-top footer navbar-fixed-botoom text-muted text-center">
         <div class="container">
             Copyright  &copy; Book Store @DateTime.Now.Year
         </div>
