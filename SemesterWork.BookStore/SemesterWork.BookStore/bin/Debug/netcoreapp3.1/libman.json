@@ -10,5 +10,11 @@
       "library": "twitter-bootstrap@4.4.1",
       "destination": "wwwroot/lib/twitter-bootstrap/"
     }
-  ]
+  ,
+{
+  "provider": "cdnjs",
+  "library": "jquery-ajax-unobtrusive@3.2.6",
+  "destination": "wwwroot/jquery-ajax-unobtrusive/"
+}
+]
 }

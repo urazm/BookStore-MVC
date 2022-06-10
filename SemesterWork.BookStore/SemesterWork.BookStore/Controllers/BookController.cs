@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SemesterWork.BookStore.Models;
 using SemesterWork.BookStore.Repository;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SemesterWork.BookStore.Controllers
@@ -9,9 +13,16 @@ namespace SemesterWork.BookStore.Controllers
     public class BookController : Controller
     {
         private readonly BookRepository _bookRepository = null;
-        public BookController(BookRepository bookRepository)
+        private readonly LanguageRepository _languageRepository = null;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public BookController(BookRepository bookRepository, 
+            LanguageRepository languageRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
+            _languageRepository = languageRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ViewResult> GetAllBooks()
@@ -32,11 +43,17 @@ namespace SemesterWork.BookStore.Controllers
         {
             return _bookRepository.SearchBook(bookName,authorName);
         }
-        public ViewResult AddNewBook(bool isSuccess = false, int bookId=0)
+        
+        public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
+            var model = new BookModel();
+
+
+            ViewBag.Language = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
+
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -44,18 +61,32 @@ namespace SemesterWork.BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(bookModel.CoverPhoto != null)
+                {
+                    string folder = "books/cover/";
+                    folder += Guid.NewGuid().ToString() + "_" + bookModel.CoverPhoto.FileName;
+
+                    bookModel.CoverImageUrl = "/"+folder;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+
+                }
+
+
                 int id = await _bookRepository.AddNewBook(bookModel);
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
                 }
             }
+
+            
             ModelState.AddModelError("", "custom error message");
-
-
+            ViewBag.Language = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
+            
             return View();
         }
-
     }
 }
 
