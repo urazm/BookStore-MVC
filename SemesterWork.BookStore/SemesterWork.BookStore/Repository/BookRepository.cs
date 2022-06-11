@@ -29,7 +29,16 @@ namespace SemesterWork.BookStore.Repository
                 UpdatedOn = DateTime.UtcNow,
                 CoverImageUrl = model.CoverImageUrl
             };
+            newBook.bookGallery = new List<BookGallery>();
 
+            foreach (var file in model.Gallery)
+            {
+                newBook.bookGallery.Add(new BookGallery()
+                {
+                    Name = file.Name,
+                    URL = file.URL
+                });
+            }
             await _context.Books.AddAsync(newBook);
             await _context.SaveChangesAsync();
 
@@ -64,7 +73,13 @@ namespace SemesterWork.BookStore.Repository
                      Language = book.Language.Name,
                      Title = book.Title,
                      TotalPages = book.TotalPages,
-                     CoverImageUrl = book.CoverImageUrl
+                     CoverImageUrl = book.CoverImageUrl,
+                     Gallery = book.bookGallery.Select(g => new GalleryModel()
+                     {
+                         Id = g.Id,
+                         Name = g.Name,
+                         URL = g.URL
+                     }).ToList()
                  }).FirstOrDefaultAsync();
         }
 
