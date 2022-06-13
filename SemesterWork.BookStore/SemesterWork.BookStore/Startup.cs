@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SemesterWork.BookStore.Data;
+using SemesterWork.BookStore.Models;
 using SemesterWork.BookStore.Repository;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace SemesterWork.BookStore
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddScoped<BookRepository, BookRepository>();
             services.AddScoped<LanguageRepository, LanguageRepository>();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreContext>();
             services.AddScoped<IAccountRepository, AccountRepository>();
         }
 

@@ -36,6 +36,7 @@ namespace SemesterWork.BookStore.Controllers
                     return View(userModel);
                 }
                 ModelState.Clear();
+                return View();
             }
             return View(userModel);
         }
