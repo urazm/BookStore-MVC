@@ -22,6 +22,15 @@ namespace SemesterWork.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True;"));
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            });
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddScoped<BookRepository, BookRepository>();
