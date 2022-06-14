@@ -38,6 +38,10 @@ namespace SemesterWork.BookStore
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookStoreContext>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,10 +54,11 @@ namespace SemesterWork.BookStore
             
             app.UseStaticFiles();
 
-
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
