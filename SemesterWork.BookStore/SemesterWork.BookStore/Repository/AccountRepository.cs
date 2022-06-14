@@ -31,5 +31,9 @@ namespace SemesterWork.BookStore.Repository
         {
             return await _signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, false);
         }
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }

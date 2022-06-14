@@ -8,5 +8,6 @@ namespace SemesterWork.BookStore.Repository
     {
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
+        Task SignOutAsync();
     }
 }
